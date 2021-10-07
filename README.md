@@ -2,7 +2,7 @@
 
 A library that adds text animation to the p5.js
 
-Want to see all the animations? https://scarysheep.github.io/p5-creative-coding/projects/aniText/index.html
+Want to see all the animations? https://scarysheep.github.io/p5-creative-coding/projects/animatedText/index.html
 
 Want to see a basic demo of usage? https://editor.p5js.org/ScarySheep/sketches/5CpIcQxcK
 
