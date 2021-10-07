@@ -1,130 +1,151 @@
 //do not support multiline
 //do not support x2, y2 aka boundaries
 class AnimatedText {
+    #animation
+    #length
+    #str
+    #x1
+    #y1
+    #textWidth
+    #textHeight
+    #startTime
+    #color
+    #animationFinished
     constructor(str, x1, y1, color, animation, length = 1000, autostart = true) {
-        this.animation = animation
-        this.length = length
-        this.str = str
-        this.x1 = x1
-        this.y1 = y1
-        this.textWidth = textWidth(this.str)
-        this.textHeight = this.getTextHeight(this.str)
-        this.animationFinished = true
-        this.startTime = 0
-        this.color = color
+        this.#animation = animation
+        this.#length = length
+        this.#str = str
+        this.#x1 = x1
+        this.#y1 = y1
+        this.#textWidth = textWidth(this.#str)
+        this.#textHeight = this.#getTextHeight(this.#str)
+        this.#animationFinished = true
+        this.#startTime = 0
+        this.#color = color
         if (autostart) {
             this.start()
         }
     }
 
     start () {
-        this.startTime = millis()
-        this.animationFinished = false
+        this.#startTime = millis()
+        this.#animationFinished = false
+        this.#color.setAlpha(255)
     }
 
     setAnimation (s) {
-        this.animation = s
+        this.#animation = s
     }
 
     setText (s) {
-        this.str = s
+        this.#str = s
+    }
+
+    setPosition (x1, y1) {
+        this.#x1 = x1
+        this.#y1 = y1
+    }
+
+    setColor (c) {
+        this.#color = c
     }
 
     render () {
-        this.textWidth = textWidth(this.str)
-        this.textHeight = this.getTextHeight(this.str)
+        this.#textWidth = textWidth(this.#str)
+        this.#textHeight = this.#getTextHeight(this.#str)
 
-        if ((millis() - this.startTime) > this.length && !this.animationFinished) {
-            this.animationFinished = true
+        if ((millis() - this.#startTime) > this.#length && !this.#animationFinished) {
+            this.#animationFinished = true
         }
 
-        if (!this.animationFinished) {
-            let delta = (millis() - this.startTime) / this.length
-            switch (this.animation) {
+        if (!this.#animationFinished) {
+            let delta = (millis() - this.#startTime) / this.#length
+            fill(this.#color)
+            switch (this.#animation) {
                 //for slide in/out animations, the offset will be the width or height of the string
                 case "slideInLeft":
-                    text(this.str,
-                        this.textWidth * (1 - (1 - delta) * (1 - delta)) + (this.x1 - this.textWidth),
-                        this.y1)
+                    text(this.#str,
+                        this.#textWidth * (1 - (1 - delta) * (1 - delta)) + (this.#x1 - this.#textWidth),
+                        this.#y1)
                     break;
                 case "slideInRight":
-                    text(this.str,
-                        -this.textWidth * (1 - (1 - delta) * (1 - delta)) + (this.x1 + this.textWidth),
-                        this.y1)
+                    text(this.#str,
+                        -this.#textWidth * (1 - (1 - delta) * (1 - delta)) + (this.#x1 + this.#textWidth),
+                        this.#y1)
                     break;
                 case "slideInUp":
-                    text(this.str,
-                        this.x1,
-                        this.textHeight * (1 - (1 - delta) * (1 - delta)) + (this.y1 - this.textHeight))
+                    text(this.#str,
+                        this.#x1,
+                        this.#textHeight * (1 - (1 - delta) * (1 - delta)) + (this.#y1 - this.#textHeight))
                     break;
                 case "slideInDown":
-                    text(this.str,
-                        this.x1,
-                        -this.textHeight * (1 - (1 - delta) * (1 - delta)) + (this.y1 + this.textHeight))
+                    text(this.#str,
+                        this.#x1,
+                        -this.#textHeight * (1 - (1 - delta) * (1 - delta)) + (this.#y1 + this.#textHeight))
                     break;
                 case "slideOutLeft":
-                    text(this.str,
-                        -this.textWidth * (1 - (1 - delta) * (1 - delta)) + this.x1,
-                        this.y1)
+                    text(this.#str,
+                        -this.#textWidth * (1 - (1 - delta) * (1 - delta)) + this.#x1,
+                        this.#y1)
                     break;
                 case "slideOutRight":
-                    text(this.str,
-                        this.textWidth * (1 - (1 - delta) * (1 - delta)) + this.x1,
-                        this.y1)
+                    text(this.#str,
+                        this.#textWidth * (1 - (1 - delta) * (1 - delta)) + this.#x1,
+                        this.#y1)
                     break;
                 case "slideOutUp":
-                    text(this.str,
-                        this.x1,
-                        -this.textHeight * (1 - (1 - delta) * (1 - delta)) + this.y1)
+                    text(this.#str,
+                        this.#x1,
+                        -this.#textHeight * (1 - (1 - delta) * (1 - delta)) + this.#y1)
                     break;
                 case "slideOutDown":
-                    text(this.str,
-                        this.x1,
-                        this.textHeight * (1 - (1 - delta) * (1 - delta)) + this.y1)
+                    text(this.#str,
+                        this.#x1,
+                        this.#textHeight * (1 - (1 - delta) * (1 - delta)) + this.#y1)
                     break;
                 case "zoomIn":
                     push()
-                    translate(this.x1 + this.textWidth / 2, this.y1 - this.textHeight / 2)
+                    translate(this.#x1 + this.#textWidth / 2, this.#y1 - this.#textHeight / 2)
                     scale(1 - (1 - delta) * (1 - delta))
-                    translate(-this.textWidth / 2, this.textHeight / 2)
-                    this.color.setAlpha(255 * (1 - (1 - delta) * (1 - delta)))
-                    fill(this.color)
-                    text(this.str, 0, 0)
+                    translate(-this.#textWidth / 2, this.#textHeight / 2)
+                    this.#color.setAlpha(255 * (1 - (1 - delta) * (1 - delta)))
+                    fill(this.#color)
+                    text(this.#str, 0, 0)
                     pop()
                     break;
                 case "zoomOut":
                     push()
-                    translate(this.x1 + this.textWidth / 2, this.y1 - this.textHeight / 2)
+                    translate(this.#x1 + this.#textWidth / 2, this.#y1 - this.#textHeight / 2)
                     scale((1 - delta) * (1 - delta))
-                    translate(-this.textWidth / 2, this.textHeight / 2)
-                    this.color.setAlpha(255 * ((1 - delta) * (1 - delta)))
-                    fill(this.color)
-                    text(this.str, 0, 0)
+                    translate(-this.#textWidth / 2, this.#textHeight / 2)
+                    this.#color.setAlpha(255 * ((1 - delta) * (1 - delta)))
+                    fill(this.#color)
+                    text(this.#str, 0, 0)
                     pop()
                     break;
                 case "rotateIn":
                     push()
-                    translate(this.x1 + this.textWidth / 2, this.y1 - this.textHeight / 2)
+                    translate(this.#x1 + this.#textWidth / 2, this.#y1 - this.#textHeight / 2)
                     rotate(PI + PI * (1 - (1 - delta) * (1 - delta)))
-                    translate(-this.textWidth / 2, this.textHeight / 2)
-                    this.color.setAlpha(255 * (1 - (1 - delta) * (1 - delta)))
-                    fill(this.color)
-                    text(this.str, 0, 0)
+                    translate(-this.#textWidth / 2, this.#textHeight / 2)
+                    this.#color.setAlpha(255 * (1 - (1 - delta) * (1 - delta)))
+                    fill(this.#color)
+                    text(this.#str, 0, 0)
                     pop()
                     break;
                 case "rotateOut":
                     push()
-                    translate(this.x1 + this.textWidth / 2, this.y1 - this.textHeight / 2)
+                    translate(this.#x1 + this.#textWidth / 2, this.#y1 - this.#textHeight / 2)
                     rotate(PI + PI * ((1 - delta) * (1 - delta)))
-                    translate(-this.textWidth / 2, this.textHeight / 2)
-                    this.color.setAlpha(255 * ((1 - delta) * (1 - delta)))
-                    fill(this.color)
-                    text(this.str, 0, 0)
+                    translate(-this.#textWidth / 2, this.#textHeight / 2)
+                    this.#color.setAlpha(255 * ((1 - delta) * (1 - delta)))
+                    fill(this.#color)
+                    text(this.#str, 0, 0)
                     pop()
                     break;
             }
         } else {
-            switch (this.animation) {
+            switch (this.#animation) {
                 case "slideOutLeft":
 
                     break;
@@ -142,17 +163,16 @@ class AnimatedText {
                 case "rotateOut":
                     break;
                 default:
-                    text(this.str,
-                        this.x1,
-                        this.y1)
+                    text(this.#str,
+                        this.#x1,
+                        this.#y1)
                     break;
             }
-
         }
     }
 
     //this function is from https://editor.p5js.org/ThatsTrue/sketches/QmHcXTd_o
-    getTextHeight (text, textsize, abovesize, belowsize, maxheight) {
+    #getTextHeight (text, textsize, abovesize, belowsize, maxheight) {
         var above;
         var below;
         push();

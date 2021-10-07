@@ -48,21 +48,37 @@ Whenever you want to start the animation again call. Remember don't put this in 
 t.start()
 ```
 
-For changing the text
+Change the text
 
 ```javascript
 t.setText("Your new text!")
 ```
 
-For changing the animation
+Change the animation
 
 ```javascript
 t.setAnimation("enter the animation name here")
 ```
 
+For changing the position
+
+```javascript
+t.setPosition(x1,y1)
+```
+
+Change the color
+
+```javascript
+t.setColor(color)
+```
+
+
+
 # Important stuff
 
 This library is built to be compatible with p5 as much as possible. So normally all functions like textSize(), rotate(), scale(), etc will affect the animation text except fill() since we are passing the color manually.
+
+**Remember to use fill() again if you want to draw anything after drawing the animation!**
 
 At this moment the animation text doesn't support the x2, y2 parameters that you can find in the p5 library text function.
 
