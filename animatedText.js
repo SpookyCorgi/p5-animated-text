@@ -22,6 +22,16 @@ class AnimatedText {
         this.animationFinished = false
     }
 
+    setAnimation (s) {
+        this.animation = s
+    }
+
+    setText (s) {
+        this.str = s
+        this.textWidth = textWidth(this.str)
+        this.textHeight = this.getTextHeight(this.str)
+    }
+
     render () {
         if ((millis() - this.startTime) > this.length && !this.animationFinished) {
             this.animationFinished = true

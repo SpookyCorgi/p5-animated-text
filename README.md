@@ -2,15 +2,24 @@
 
 A library that add text animation to the p5.js
 
+Want to see all the animations? https://scarysheep.github.io/p5-creative-coding/projects/aniText/index.html
+
+Want to see a basic demo of usage? https://editor.p5js.org/ScarySheep/sketches/5CpIcQxcK
+
 Current animations. More to come!
 
-| slideInLeft  | slideInRight  | slideInUp  | slideInLeft  |
-| ------------ | ------------- | ---------- | ------------ |
-|              |               |            |              |
-| slideOutLeft | slideOutRight | slideOutUp | slideOutLeft |
-|              |               |            |              |
-| zoomIn       | zoomOut       | rotateIn   | rotateOut    |
-|              |               |            |              |
+- slideInLeft
+- slideInRight
+- slideInUp
+- slideInDown
+- slideOutLeft
+- slideOutRight
+- slideOutUp
+- slideOutDown
+- zoomIn
+- zoomOut
+- rotateIn
+- rotateOut
 
 # How to use it?
 
