@@ -1,7 +1,7 @@
 //do not support multiline
 //do not support x2, y2 aka boundaries
 class AnimatedText {
-    constructor(str, x1, y1, color, animation, autostart = true, length = 1000) {
+    constructor(str, x1, y1, color, animation, length = 1000, autostart = true) {
         this.animation = animation
         this.length = length
         this.str = str
