@@ -60,7 +60,7 @@ Change the animation
 t.setAnimation("enter the animation name here")
 ```
 
-For changing the position
+Change the position
 
 ```javascript
 t.setPosition(x1,y1)
